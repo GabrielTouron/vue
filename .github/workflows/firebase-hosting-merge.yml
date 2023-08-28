@@ -23,6 +23,6 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: gcp-key.json
+          firebaseServiceAccount: "$(cat gcp-key.json)"
           channelId: live
           projectId: pulumi-395313
