@@ -12,9 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm ci && npm run build
+
+      - name: Set up GCP Key
+        run: |
+          echo ${{ secrets.FIREBASE_SA_KEY | base64 -d > gcp-key.json
+        shell: bash
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SA_KEY }}'
+          firebaseServiceAccount: 'gcp-key.json'
           channelId: live
           projectId: pulumi-395313
