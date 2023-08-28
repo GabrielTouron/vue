@@ -12,19 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm ci && npm run build
-
-      - name: Retrieve the secret and decode it
-        env:
-          FIREBASE_SA_KEY: ${{ secrets.FIREBASE_SA_KEY }}
-          
-        run: |
-          echo $FIREBASE_SA_KEY | base64 -d > gcp-key.json
-          echo "FIREBASE_SERVICE_ACCOUNT=$(cat gcp-key.json)" >> .env
-        shell: bash
-
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ env.FIREBASE_SERVICE_ACCOUNT }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SA_KEY }}'
           channelId: live
           projectId: pulumi-395313
