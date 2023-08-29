@@ -1,3 +1,4 @@
+## You can delete this workflow after you have run it once.
 name: Deploy to Firebase Hosting preview on first push
 'on':
   push:
