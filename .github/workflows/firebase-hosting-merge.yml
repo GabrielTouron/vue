@@ -25,7 +25,7 @@ jobs:
           projectId: pulumi-395313
 
       - name: Deploy to Firebaes Hosting
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+        uses: FirebaseExtended/action-hosting-deploy@v0
         if: ${{ github.event.commits[0].message != 'Initial commit' }}}
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
