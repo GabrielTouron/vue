@@ -16,10 +16,9 @@ jobs:
         run: |
           if [[ "$(git log --format=%B -n 1 ${{ github.sha }})" != "Initial commit" ]]; then
             echo "The commit message is not 'Initial commit', so the workflow will continue."
-            exit 0
           else
             echo "The commit message is 'Initial commit', so the workflow will be skipped."
-            exit 1
+            exit 0 # Exit with a zero exit code, which means success 
           fi
 
       - run: npm ci && npm run build
