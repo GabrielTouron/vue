@@ -3,6 +3,10 @@ name: Deploy to Firebase Hosting preview on first push
   push:
     branches:
       - main
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
 
 jobs:
   build_and_deploy:
@@ -15,10 +19,6 @@ jobs:
         run: npm ci && npm run build
 
       - name: Deploy to Firebase Hosting preview channel
-        permissions:
-          checks: write
-          contents: read
-          pull-requests: write
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
