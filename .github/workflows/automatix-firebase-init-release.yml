@@ -10,12 +10,29 @@ permissions:
   pull-requests: write
 jobs:
   build_and_preview:
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm ci && npm run build
+
+      - name: Check if it's the first commit
+        id: check_first_commit
+        run: |
+          # Check the commit history and count the number of commits
+          COMMIT_COUNT=$(git rev-list --count HEAD)
+
+          # Set an output variable indicating if it's the first commit
+          if [ "$COMMIT_COUNT" -eq "1" ]; then
+            echo "::set-output name=is_first_commit::true"
+          else
+            echo "::set-output name=is_first_commit::false"
+          fi
+
+      - name: Build
+        if: steps.check_first_commit.outputs.is_first_commit == 'true'
+        run: npm ci && npm run build
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
+        if: steps.check_first_commit.outputs.is_first_commit == 'true'
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SA_KEY }}'
