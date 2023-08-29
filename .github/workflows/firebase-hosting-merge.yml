@@ -18,7 +18,7 @@ jobs:
 
       - name: Deploy to Firebase Hosting preview channel
         uses: FirebaseExtended/action-hosting-deploy@v0
-        if: ${{ github.event.commits[0].message == 'Initial commit' }}}
+        if: ${{ github.event.head_commit.message == 'Initial commit' }}}
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SA_KEY }}'
@@ -26,7 +26,7 @@ jobs:
 
       - name: Deploy to Firebaes Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
-        if: ${{ github.event.commits[0].message != 'Initial commit' }}}
+        if: ${{ github.event.head_commit.message != 'Initial commit' }}}
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SA_KEY }}'
