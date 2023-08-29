@@ -1,7 +1,10 @@
-name: Deploy to Firebase Hosting on PR
+name: Deploy to Firebase Hosting on Autamatix
 'on':
-  branch: automatix
-permissions:
+  push:
+    branches:
+      - automatix
+
+pmainermissions:
   checks: write
   contents: read
   pull-requests: write
