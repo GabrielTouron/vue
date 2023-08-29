@@ -17,16 +17,16 @@ jobs:
         run: npm ci && npm run build
 
       - name: Deploy to Firebase Hosting preview channel
-        uses: FirebaseExtended/action-hosting-deploy@v0
         if: ${{ github.event.head_commit.message == 'Initial commit' }}}
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SA_KEY }}'
           projectId: pulumi-395313
 
       - name: Deploy to Firebaes Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
         if: ${{ github.event.head_commit.message != 'Initial commit' }}}
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SA_KEY }}'
