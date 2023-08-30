@@ -17,5 +17,5 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SA_KEY }}'
-          projectId: '${{ env.FIREBASE_PROJECT_ID }}'
+          projectId: '${{ vars.FIREBASE_PROJECT_ID }}'
           channelId: preprod

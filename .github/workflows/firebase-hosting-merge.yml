@@ -15,4 +15,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SA_KEY }}'
           channelId: live
-          projectId: '${{ env.FIREBASE_PROJECT_ID }}'
+          projectId: '${{ vars.FIREBASE_PROJECT_ID }}'
